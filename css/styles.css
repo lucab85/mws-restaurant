@@ -3,7 +3,8 @@
 
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
+    font-size: 16px;
+    line-height: 1.2em;
 	color: #333;
 	line-height: 1.5;
 }
@@ -14,7 +15,8 @@ body {
 }
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
+	font-size: 16pt;
+	line-height: 1.2em;
 	color: #333;
 }
 a {
@@ -42,7 +44,8 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 #footer {
   background-color: #444;
   color: #aaa;
-  font-size: 8pt;
+  font-size: 14px;
+  line-height: 1.2em;
   letter-spacing: 1px;
   padding: 25px;
   text-align: center;
@@ -60,7 +63,8 @@ nav h1 {
 }
 nav h1 a {
   color: #fff;
-  font-size: 14pt;
+  font-size: 18px;
+  line-height: 1.25em;
   font-weight: 200;
   letter-spacing: 10px;
   text-transform: uppercase;
@@ -69,7 +73,8 @@ nav h1 a {
     padding: 10px 40px 16px;
     list-style: none;
     background-color: #eee;
-    font-size: 17px;
+    font-size: 18px;
+    line-height: 1.25em;
     margin: 0;
     width: calc(50% - 80px);
 }
@@ -121,7 +126,8 @@ nav h1 a {
   background-color: white;
   border: 1px solid #fff;
   font-family: Arial,sans-serif;
-  font-size: 11pt;
+  font-size: 16px;
+  line-height: 1.2em;
   height: 35px;
   letter-spacing: 0;
   margin: 10px;
