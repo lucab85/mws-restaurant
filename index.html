@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css" type="text/css">
   <title>Restaurant Reviews</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="txt/html;charset=utf-8">
@@ -20,7 +21,7 @@
     <section id="map-container">
       <div id="map"></div>
     </section>
-    <section>
+    <section id="filter-container">
       <div class="filter-options">
         <h2>Filter Results</h2>
         <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
