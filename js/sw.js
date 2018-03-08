@@ -1,14 +1,14 @@
 var staticCacheName = 'nws-restaurant-stage-1';
-let sw-filelist = [
-   '/index.html',
-   '/restaurant.html',
-   '/js/dbhelper.js',
-   '/js/main.js',
-   '/js/restaurant_info.js',
-   '/js/sw.js',
-   '/css/styles.css',
-   '/css/responsive.css',
-   '/data/restaurants.json',
+let fileToCache = [
+   'index.html',
+   'restaurant.html',
+   'js/dbhelper.js',
+   'js/main.js',
+   'js/restaurant_info.js',
+   'js/sw.js',
+   'css/styles.css',
+   'css/responsive.css',
+   'data/restaurants.json',
 ];
 
 self.addEventListener('install', function(event) {
@@ -16,7 +16,7 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(staticCacheName).then(function(cache) {
       console.log('serviceWorker is caching app shell');
-      return cache.addAll(sw-filelist);
+      return cache.addAll(fileToCache);
     })
   );
 });

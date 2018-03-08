@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/js/sw.js')
+    navigator.serviceWorker.register('js/sw.js')
     .then((reg) => {
       console.log('SW Registration successful. Scope is ' + reg.scope);
     }).catch((error) => {
