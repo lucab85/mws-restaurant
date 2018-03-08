@@ -1,3 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #BF1722;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 0;
+}
+
 #maincontent {
   display: flex;
   flex-wrap: wrap;
