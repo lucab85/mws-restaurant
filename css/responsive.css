@@ -19,10 +19,13 @@
   flex-wrap: wrap;
 }
 
-#map-container, .filter-container, footer {
+#map-container, .filter-container {
   width: 100%;
 }
 
+#breadcrumb {
+  width: 100%;
+}
 .inside #map-container {
   width: 100%;
 }
@@ -43,6 +46,7 @@
 
    .inside #map-container {
      width: 50%;
+     display: block;
    }
    .inside #restaurant-container {
      width: 50%;
@@ -70,13 +74,4 @@
   .inside #reviews-container {
      width: 50%;
    }
-}
-
-
-@media screen and (min-width: 850px) {
-  #maincontent {
-    width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
