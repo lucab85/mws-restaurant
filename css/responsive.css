@@ -36,12 +36,17 @@
 .inside #reviews-container {
   width: 100%;
 }
+#restaurants-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 
 @media screen and (min-width: 450px){
    #map-container {
      width: 100%;
    }
-   .filter-container {
+   #filter-container {
      width: 100%;
    }
 
@@ -60,6 +65,9 @@
    }
 }
 @media screen and (min-width: 550px){
+   #filter-container {
+     width: 100%;
+   }
    .inside #map-container {
      width: 50%;
    }
