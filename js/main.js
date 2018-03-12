@@ -5,19 +5,13 @@ var map
 var markers = []
 
 /**
- * Fetch neighborhoods and cuisines as soon as the page is loaded.
+ * Initialize ServiceWorker, fetch neighborhoods and cuisines as soon 
+ * as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
+  DBHelper.startServiceWorker();
   fetchNeighborhoods();
   fetchCuisines();
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('js/sw.js')
-    .then((reg) => {
-      console.log('SW Registration successful. Scope is ' + reg.scope);
-    }).catch((error) => {
-      console.log('SW Registration failed with ' + error);
-    });
-  }
 });
 
 /**

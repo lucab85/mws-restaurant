@@ -25,6 +25,7 @@
 
 #breadcrumb {
   width: 100%;
+  height: unset;
 }
 .inside #map-container {
   width: 100%;
@@ -47,24 +48,18 @@
    .inside #map-container {
      width: 50%;
      display: block;
+     position: fixed;
+     height: 100%;
    }
    .inside #restaurant-container {
      width: 50%;
+     width: calc(50% - 80px);
    }
   .inside #reviews-container {
-     width: 50%;
+     width: calc(50% - 80px);
    }
 }
 @media screen and (min-width: 550px){
-   #map-container {
-     width: 50%;
-     order: 1;
-   }
-   #filter-container {
-      width: 50%;
-      order: 0;
-   }
-   
    .inside #map-container {
      width: 50%;
    }
