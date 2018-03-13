@@ -13,23 +13,39 @@
 .skip-link:focus {
   top: 0;
 }
-
 #maincontent {
   display: flex;
   flex-wrap: wrap;
 }
-
-#map-container, .filter-container, footer {
+#map-container, .filter-container {
   width: 100%;
 }
-
+#breadcrumb {
+  width: 100%;
+  height: unset;
+}
+.inside #maincontent {
+  display: flex;
+}
+.filter-options {
+  text-align: center
+}
 .inside #map-container {
   width: 100%;
 }
 .inside #restaurant-container {
   width: 100%;
+  padding: 80px 10px 10px;
 }
 .inside #reviews-container {
+  width: 100%;
+  padding: 80px 10px 10px;
+}
+#restaurants-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+#filter-container {
   width: 100%;
 }
 
@@ -37,46 +53,32 @@
    #map-container {
      width: 100%;
    }
-   .filter-container {
-     width: 100%;
-   }
-
    .inside #map-container {
-     width: 50%;
+     width: 100%;
+     display: block;
+     position: static;
+     height: 50%;
    }
    .inside #restaurant-container {
-     width: 50%;
+     width: calc(100% - 10px);
    }
   .inside #reviews-container {
-     width: 50%;
+     width: calc(100% - 10px);
    }
 }
 @media screen and (min-width: 550px){
-   #map-container {
-     width: 50%;
-     order: 1;
-   }
    #filter-container {
-      width: 50%;
-      order: 0;
+     width: 100%;
    }
-   
    .inside #map-container {
      width: 50%;
+     height: 80%;
+     position: fixed;
    }
    .inside #restaurant-container {
-     width: 50%;
+     width: calc(50% - 10px);
    }
   .inside #reviews-container {
-     width: 50%;
+     width: calc(50% - 10px);
    }
-}
-
-
-@media screen and (min-width: 850px) {
-  #maincontent {
-    width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }

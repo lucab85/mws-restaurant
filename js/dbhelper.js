@@ -168,4 +168,20 @@ class DBHelper {
     return marker;
   }
 
+
+  /**
+   * Start ServiceWorker
+   */
+  static startServiceWorker() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+      .then((reg) => {
+        console.log('SW Registration successful. Scope is ' + reg.scope);
+      }).catch((error) => {
+        console.log('SW Registration failed with ' + error);
+      });
+    }
+  }
+
+
 }
