@@ -13,26 +13,23 @@
 .skip-link:focus {
   top: 0;
 }
-
 #maincontent {
   display: flex;
   flex-wrap: wrap;
 }
-
 #map-container, .filter-container {
   width: 100%;
 }
-
 #breadcrumb {
   width: 100%;
   height: unset;
 }
-
 .inside #maincontent {
   display: flex;
 }
-
-
+.filter-options {
+  text-align: center
+}
 .inside #map-container {
   width: 100%;
 }
@@ -51,7 +48,6 @@
 #filter-container {
   width: 100%;
 }
-
 
 @media screen and (min-width: 450px){
    #map-container {
