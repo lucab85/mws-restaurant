@@ -1,6 +1,9 @@
 @charset "utf-8";
 /* CSS Document */
 
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}
 .skip-link {
   position: absolute;
   top: -40px;
@@ -26,9 +29,12 @@
 }
 .inside #maincontent {
   display: flex;
+  align-content: center;
+  align-items: center;
+  text-align: left;
 }
 .filter-options {
-  text-align: center
+  text-align: center;
 }
 .inside #map-container {
   width: 100%;
@@ -41,10 +47,17 @@
   width: 100%;
   padding: 80px 10px 10px;
 }
+#restaurant-name {
+  text-align: center;
+}
 #restaurants-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+#restaurants-list li {
+  margin: 0 auto;
+  text-align: center;
 }
 #filter-container {
   width: 100%;
