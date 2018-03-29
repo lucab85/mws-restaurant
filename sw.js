@@ -1,14 +1,14 @@
 var staticCacheName = 'nws-restaurant-stage-1';
 let fileToCache = [
-   'index.html',
-   'restaurant.html',
-   'js/dbhelper.js',
-   'js/main.js',
-   'js/restaurant_info.js',
-   'sw.js',
-   'css/styles.css',
-   'css/responsive.css',
-   'data/restaurants.json',
+  'index.html',
+  'restaurant.html',
+  'js/dbhelper.js',
+  'js/main.js',
+  'js/restaurant_info.js',
+  'sw.js',
+  'css/styles.css',
+  'css/responsive.css',
+  'data/restaurants.json',
 ];
 
 self.addEventListener('install', function(event) {

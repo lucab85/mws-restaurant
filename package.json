@@ -1,0 +1,36 @@
+{
+  "name": "mws-restaurant-review",
+  "version": "1.0.0",
+  "description": "mws-restaurant-review",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucab85/mws-restaurant-stage-1.git"
+  },
+  "keywords": [
+    "mobile web specialist",
+    "nanodegree",
+    "restaurant review"
+  ],
+  "author": "Luca Berton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucab85/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/lucab85/mws-restaurant-stage-1#readme",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "browser-sync": "^2.23.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^4.0.2",
+    "gulp-sass": "^3.2.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0"
+  }
+}
