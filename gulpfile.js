@@ -32,22 +32,17 @@ gulp.task('dist', [
 gulp.task('scripts', function() {
   gulp.src('js/**/*.js')
     .pipe(babel())
-    .pipe(concat('all.js'))
     .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('scripts-dist', function() {
   gulp.src('js/**/*.js')
-    .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(concat('all.js'))
-    .pipe(uglify())
-    .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('copy-html', function() {
-  gulp.src('./index.html')
+  gulp.src('./*.html')
     .pipe(gulp.dest('./dist'));
 });
 
