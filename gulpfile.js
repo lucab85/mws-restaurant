@@ -13,8 +13,8 @@ var sourcemaps = require('gulp-sourcemaps');
 gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint', 'scripts'], function() {
   gulp.watch('sass/**/*.scss', ['styles']);
   gulp.watch('js/**/*.js', ['lint']);
-  gulp.watch('/index.html', ['copy-html']);
-  gulp.watch('./dist/index.html').on('change', browserSync.reload);
+  gulp.watch('/*.html', ['copy-html']);
+  gulp.watch('./dist/*.html').on('change', browserSync.reload);
 
   browserSync.init({
     server: './dist'
@@ -33,12 +33,18 @@ gulp.task('scripts', function() {
   gulp.src('js/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('dist/js'));
+  gulp.src('js/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('scripts-dist', function() {
   gulp.src('js/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('dist/js'));
+  gulp.src('js/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('copy-html', function() {

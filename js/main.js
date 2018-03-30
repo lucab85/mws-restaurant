@@ -1,7 +1,7 @@
 /*eslint-env es6*/
 
 /*eslint-disable no-unused-vars*/
-let restaurants,
+var restaurants,
   neighborhoods,
   cuisines;
 var map;

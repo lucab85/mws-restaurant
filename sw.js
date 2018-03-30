@@ -7,8 +7,7 @@ let fileToCache = [
   'js/restaurant_info.js',
   'sw.js',
   'css/styles.css',
-  'css/responsive.css',
-  'data/restaurants.json',
+  'css/responsive.css'
 ];
 
 self.addEventListener('install', function(event) {

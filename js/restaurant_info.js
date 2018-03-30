@@ -2,7 +2,7 @@
 
 /*eslint-disable no-unused-vars*/
 var restaurant;
-let map;
+var map;
 /*eslint-enable no-unused-vars*/
 
 /**

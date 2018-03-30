@@ -7,9 +7,10 @@ class DBHelper {
    * Database URL.
    * Change this to restaurants.json file location on your server.
    */
-  get DATABASE_URL() {
+  static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants/`;
+    const server = 'localhost';
+    return `http://${server}:${port}/restaurants`;
     //return 'data/restaurants.json';
   }
 
@@ -18,9 +19,11 @@ class DBHelper {
    */
   static fetchRestaurants(callback) {
     fetch(DBHelper.DATABASE_URL)
-      .then(response => response.json().restaurants)
-      .then(callback(null))
-      .catch(e => callback(`Request failed. Returned status of ${e.status}`));
+      .then(response => response.json())
+      .then(data => {
+        return data.restaurants;
+      })
+      .catch(e => this.requestError(e, callback));
   }
 
   /**
