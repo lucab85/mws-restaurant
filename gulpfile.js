@@ -9,6 +9,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
+var webserver = require('gulp-webserver');
 
 gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint', 'scripts'], function() {
   gulp.watch('sass/**/*.scss', ['styles']);
@@ -79,4 +80,12 @@ gulp.task('lint', function () {
 });
 
 gulp.task('tests', function () {
+});
+
+gulp.task('webserver', function() {
+  gulp.src('dist')
+    .pipe(webserver({
+      livereload: true,
+      open: true
+    }));
 });

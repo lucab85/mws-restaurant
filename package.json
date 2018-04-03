@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lucab85/mws-restaurant-stage-1.git"
+    "url": "git+https://github.com/lucab85/mws-restaurant.git"
   },
   "keywords": [
     "mobile web specialist",
@@ -18,9 +18,9 @@
   "author": "Luca Berton",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lucab85/mws-restaurant-stage-1/issues"
+    "url": "https://github.com/lucab85/mws-restaurant/issues"
   },
-  "homepage": "https://github.com/lucab85/mws-restaurant-stage-1#readme",
+  "homepage": "https://github.com/lucab85/mws-restaurant#readme",
   "dependencies": {
     "babel-core": "^6.26.0",
     "browser-sync": "^2.23.6",
@@ -31,6 +31,7 @@
     "gulp-eslint": "^4.0.2",
     "gulp-sass": "^3.2.1",
     "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.0"
+    "gulp-uglify": "^3.0.0",
+    "gulp-webserver": "^0.9.1"
   }
 }

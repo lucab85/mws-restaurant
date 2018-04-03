@@ -1,32 +1,48 @@
-# Mobile Web Specialist Certification Course
+# Mobile Web Specialist Nanodegree project
 ---
-#### _Three Stage Course Material Project - Restaurant Reviews_
 
-## Project Overview: Stage 1
+For the **Restaurant Reviews** projects, I incrementally converted a static webpage to a mobile-ready web application. In **Stage One**, I took a static design that lacks accessibility and converted the design to be responsive on different sized displays and accessible for screen reader use. I've  also added a service worker to begin the process of creating a seamless offline experience for my users. . In **Stage Two**, I took the responsive, accessible design you built in Stage One and connect it to an external server. I used asynchronous JavaScript to request JSON data from the server. I stored data received from the server in an offline database using IndexedDB, which created an app shell architecture. Finally, I optimized your site to meet performance benchmarks, tested with Lighthouse.
 
-For the **Restaurant Reviews** projects, I incrementally converted a static webpage to a mobile-ready web application. In **Stage One**, I took a static design that lacks accessibility and converted the design to be responsive on different sized displays and accessible for screen reader use. I've  also added a service worker to begin the process of creating a seamless offline experience for my users.
+# Usage
 
-## Evaluation points
+1. Follow the instructions of [Getting Started](#getting-started) section
+1. Open your browser to [localhost:8000](http://localhost:8000).
 
-### Responsive Design
-* All content is responsive and displays on a range of display sizes.
-  Content should make use of available screen real estate and should display correctly at all screen sizes.
-  An image's associated title and text renders next to the image in all viewport sizes.
+# Architecture
 
-* Images in the site are sized appropriate to the viewport and do not crowd or overlap other elements in the browser, regardless of viewport size.
+The full listing of restaurant is available in the homepage of the app ([index.html](index.html)).
+The details of each restaurant is loaded by the restaurant [restaurant.html?id=1](restaurant.html?id=1) (mandatory the id argument).
 
-* On the main page, restaurants and images are displayed in all viewports. The detail page includes a map, hours and reviews in all viewports.
+# Getting Started
 
-### Accessibility
-* All content-related images include appropriate alternate text that clearly describes the content of the image.
+## How to setup server
+Refer to [mws-restaurant-api](https://github.com/lucab85/mws-restaurant-api) project.
 
-* Focus is appropriately managed allowing users to noticeably tab through each of the important elements of the page. Modal or interstitial windows appropriately lock focus.
+## How to setup app
 
-* Elements on the page use the appropriate semantic elements. For those elements in which a semantic element is not available, appropriate ARIA roles are defined.
+1. Install dependencies
 
-### Offline Availability
-* When available in the browser, the site uses a service worker to cache responses to requests for site assets. Visited pages are rendered when there is no network access.
+```
+npm install
+```
 
-### Note about ES6
+1. Buil your app to `dist` directory
 
-Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code.
+```
+gulp dist
+```
+
+1. Start webserver to serve content
+
+```
+gulp webserver
+```
+
+1. Open your browser to [localhost:8000](http://localhost:8000).
+
+# How to contribute
+Refer to [CONTRIBUTING](CONTRIBUTING) file.
+
+
+# License
+Refer to [LICENSE](LICENSE) file.
