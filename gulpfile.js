@@ -34,7 +34,7 @@ gulp.task('scripts', function() {
   gulp.src('js/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('dist/js'));
-  gulp.src('js/*.js')
+  gulp.src('*.js')
     .pipe(babel())
     .pipe(gulp.dest('dist/'));
 });
@@ -43,7 +43,7 @@ gulp.task('scripts-dist', function() {
   gulp.src('js/**/*.js')
     .pipe(babel())
     .pipe(gulp.dest('dist/js'));
-  gulp.src('js/*.js')
+  gulp.src('*.js')
     .pipe(babel())
     .pipe(gulp.dest('dist/'));
 });
