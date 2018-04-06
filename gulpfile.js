@@ -80,6 +80,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('tests', function () {
+  //placeholder for tests
 });
 
 gulp.task('webserver', function() {

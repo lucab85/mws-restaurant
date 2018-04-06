@@ -26,6 +26,10 @@ class DBHelper {
       .catch(e => this.requestError(e, callback));
   }
 
+  static startIdb() {
+    //TODO
+  }
+
   /**
    * Fetch a restaurant by its ID.
    */
@@ -152,7 +156,7 @@ class DBHelper {
    * Map marker for a restaurant.
    */
   static mapMarkerForRestaurant(restaurant, map) {
-    var google;
+    let google;
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
       title: restaurant.name,

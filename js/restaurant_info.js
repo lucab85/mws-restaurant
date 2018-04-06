@@ -1,8 +1,8 @@
 /*eslint-env es6*/
 
 /*eslint-disable no-unused-vars*/
-var restaurant;
-var map;
+let restaurant;
+let map;
 /*eslint-enable no-unused-vars*/
 
 /**
@@ -44,7 +44,7 @@ fetchRestaurantFromURL = (callback) => {
   }
   const id = this.getParameterByName('id');
   if (!id) { // no id found in URL
-    var error = 'No restaurant id in URL';
+    let error = 'No restaurant id in URL';
     callback(error, null);
   } else {
     DBHelper.fetchRestaurantById(id, (error, restaurant) => {
@@ -93,7 +93,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
-  for (let key in operatingHours) {
+  //for (let key in operatingHours) {
+  for (key of operatingHours) {
     const row = document.createElement('tr');
 
     const day = document.createElement('td');

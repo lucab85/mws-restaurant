@@ -1,11 +1,11 @@
 /*eslint-env es6*/
 
 /*eslint-disable no-unused-vars*/
-var restaurants,
+let restaurants,
   neighborhoods,
   cuisines;
-var map;
-var markers = [];
+let map;
+let markers = [];
 /*eslint-enable no-unused-vars*/
 
 /**
