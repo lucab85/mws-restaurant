@@ -23,6 +23,7 @@
   "homepage": "https://github.com/lucab85/mws-restaurant#readme",
   "dependencies": {
     "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "browser-sync": "^2.23.6",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
@@ -33,5 +34,8 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "gulp-webserver": "^0.9.1"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0"
   }
 }

@@ -1,8 +1,11 @@
+/*eslint-env es6*/
+
 /**
  * Common database helper functions.
  */
 /*eslint-disable no-unused-vars*/
 class DBHelper {
+
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -20,9 +23,7 @@ class DBHelper {
   static fetchRestaurants(callback) {
     fetch(DBHelper.DATABASE_URL)
       .then(response => response.json())
-      .then(data => {
-        return data.restaurants;
-      })
+      .then(restaurants => callback(null, restaurants))
       .catch(e => this.requestError(e, callback));
   }
 
