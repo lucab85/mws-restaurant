@@ -24,7 +24,7 @@ class DBHelper {
     fetch(DBHelper.DATABASE_URL)
       .then(response => response.json())
       .then(restaurants => callback(null, restaurants))
-      .catch(e => this.requestError(e, callback));
+      .catch(e => callback(e, null));
   }
 
   static startIdb() {
@@ -150,14 +150,14 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
-    return (`img/${restaurant.photograph}`);
+    return (`img/${restaurant.photograph}.jpg`);
   }
 
   /**
    * Map marker for a restaurant.
    */
   static mapMarkerForRestaurant(restaurant, map) {
-    let google;
+    /*eslint-disable no-undef*/
     const marker = new google.maps.Marker({
       position: restaurant.latlng,
       title: restaurant.name,
@@ -165,6 +165,7 @@ class DBHelper {
       map: map,
       animation: google.maps.Animation.DROP}
     );
+    /*eslint-enable no-undef*/
     return marker;
   }
 

@@ -5,14 +5,15 @@ let restaurant;
 let map;
 /*eslint-enable no-unused-vars*/
 
-import DBHelper from './dbhelper.js';
 
 /**
  * Initialize ServiceWorker
  */
 /*eslint-disable no-unused-vars*/
 document.addEventListener('DOMContentLoaded', (event) => {
+  /*eslint-disable no-undef*/
   DBHelper.startServiceWorker();
+  /*eslint-enable no-undef*/
 });
 /*eslint-enable no-unused-vars*/
 
@@ -30,7 +31,9 @@ window.initMap = () => {
         scrollwheel: false
       });
       this.fillBreadcrumb();
+      /*eslint-disable no-undef*/
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+      /*eslint-enable no-undef*/
     }
   });
 };
@@ -96,7 +99,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
   //for (let key in operatingHours) {
-  for (key of operatingHours) {
+  for (key in operatingHours) {
     const row = document.createElement('tr');
 
     const day = document.createElement('td');
