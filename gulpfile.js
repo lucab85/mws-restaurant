@@ -108,6 +108,8 @@ gulp.task('tests', function () {
 gulp.task('webserver', function() {
   gulp.src('dist')
     .pipe(webserver({
+      host: 'localhost',
+      port: 8000,
       livereload: true,
       open: true
     }));
