@@ -5,7 +5,6 @@
  */
 /*eslint-disable no-unused-vars*/
 class DBHelper {
-
   /**
    * Database URL.
    * Change this to restaurants.json file location on your server.
@@ -27,8 +26,18 @@ class DBHelper {
       .catch(e => callback(e, null));
   }
 
-  static startIdb() {
-    //TODO
+  static openDatabase() {
+    if(!navigator.serviceWorker) {
+      return Promise.resolve();
+    }
+    /*eslint-disable no-undef*/
+    return idb.open('restaurantDb', 1, function(upgradeDB) {
+      var store = upgradeDB.createObjectStore('restaurantDb', {
+        keyPath: 'id'
+      });
+      store.createIndex('by-id', 'id');
+    });
+    /*eslint-enable no-undef*/
   }
 
   /**
