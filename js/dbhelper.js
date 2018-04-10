@@ -42,7 +42,7 @@ class DBHelper {
       if(!db)
         return;
 
-      var tx = db.transaction(IDB_DB, 'readwrite');
+      var tx = db.transaction(IDB_OBJ, 'readwrite');
       var store = tx.objectStore(IDB_OBJ);
       data.forEach(function(restaurant){
         store.put(restaurant);
@@ -71,7 +71,7 @@ class DBHelper {
     return DBHelper.idbOpen().then(function(db){
       if(!db)
         return;
-      var store = db.transaction(IDB_DB).objectStore(IDB_OBJ);
+      var store = db.transaction(IDB_OBJ).objectStore(IDB_OBJ);
       return store.getAll();
     });
   }

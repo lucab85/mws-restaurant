@@ -101,9 +101,7 @@ gulp.task('lint', function () {
     .pipe(eslint.failOnError());
 });
 
-gulp.task('tests', function () {
-  //placeholder for tests
-});
+gulp.task('test', ['dist']);
 
 gulp.task('webserver', function() {
   gulp.src('dist')

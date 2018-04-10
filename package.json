@@ -4,7 +4,7 @@
   "description": "mws-restaurant-review",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "gulp tests"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -34,8 +34,5 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "gulp-webserver": "^0.9.1"
-  },
-  "devDependencies": {
-    "babel-polyfill": "^6.26.0"
   }
 }
