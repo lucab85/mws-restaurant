@@ -1,4 +1,4 @@
-var staticCacheName = 'nws-restaurant-stage-1';
+var staticCacheName = 'mws-restaurant';
 let fileToCache = [
   'index.html',
   'restaurant.html',

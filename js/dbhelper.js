@@ -1,14 +1,13 @@
 /*eslint-env es6*/
-
-const idb_name = 'restaurantDb';
+const IDB_DB = 'restaurantDb';
+const IDB_OBJ = 'restaurantObj';
 /**
  * Common database helper functions.
  */
 /*eslint-disable no-unused-vars*/
 class DBHelper {
   /**
-   * Database URL.
-   * Change this to restaurants.json file location on your server.
+   * Database URL from API server
    */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
@@ -17,23 +16,17 @@ class DBHelper {
     //return 'data/restaurants.json';
   }
 
-  /**
-   * Fetch all restaurants.
+  /*
+   * Open connection with IDB database
    */
-  static fetchRestaurants(callback) {
-    fetch(DBHelper.DATABASE_URL)
-      .then(response => response.json())
-      .then(restaurants => callback(null, restaurants))
-      .catch(e => callback(e, null));
-  }
-
-  static openDatabase() {
-    if(!navigator.serviceWorker) {
+  static idbOpen() {
+    // Check Browser support
+    if (!navigator.serviceWorker) {
       return Promise.resolve();
     }
     /*eslint-disable no-undef*/
-    return idb.open(idb_name, 1, function(upgradeDB) {
-      var store = upgradeDB.createObjectStore(idb_name, {
+    return idb.open(IDB_DB, 1, function(upgradeDb){
+      var store = upgradeDb.createObjectStore(IDB_OBJ, {
         keyPath: 'id'
       });
       store.createIndex('by-id', 'id');
@@ -41,17 +34,62 @@ class DBHelper {
     /*eslint-enable no-undef*/
   }
 
-  static saveToDatabase(data) {
-    return DBHelper.openDatabase().then(function(db){
-      if (!db)
+  /*
+   * Save data to IDB database
+   */
+  static idbSave(data){
+    return DBHelper.idbOpen().then(function(db){
+      if(!db)
         return;
 
-      var tx = db.transaction(idb_name, 'readwrite');
-      var store = tx.ObjectStore(idb_name);
+      var tx = db.transaction(IDB_DB, 'readwrite');
+      var store = tx.objectStore(IDB_OBJ);
       data.forEach(function(restaurant){
         store.put(restaurant);
       });
-      return tx.compete;
+      return tx.complete;
+    });
+  }
+
+  /*
+   * Fetch data from API and save to IDB
+   */
+  static fetchRestaurantsFromAPI(){
+    return fetch(DBHelper.DATABASE_URL)
+      .then(function(response){
+        return response.json();
+      }).then(restaurants => {
+        DBHelper.idbSave(restaurants);
+        return restaurants;
+      });
+  }
+
+  /*
+   * Get data from IDB
+   */
+  static getCachedRestaurants() {
+    return DBHelper.idbOpen().then(function(db){
+      if(!db)
+        return;
+      var store = db.transaction(IDB_DB).objectStore(IDB_OBJ);
+      return store.getAll();
+    });
+  }
+
+  /**
+   * Fetch all restaurants.
+   */
+  static fetchRestaurants(callback) {
+    return DBHelper.getCachedRestaurants().then(restaurants => {
+      if(restaurants.length) {
+        return Promise.resolve(restaurants);
+      } else {
+        return DBHelper.fetchRestaurantsFromAPI();
+      }
+    }).then(restaurants=> {
+      callback(null, restaurants);
+    }).catch(error => {
+      callback(error, null);
     });
   }
 
