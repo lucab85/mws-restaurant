@@ -96,3 +96,14 @@ h1, h2, h3, h4, h5, h6 {
      width: calc(50% - 10px);
    }
 }
+
+@media screen and (min-width: 1000px){
+  #maincontent {
+    max-width: 1500px;
+    margin: auto;
+  }
+  .inside #maincontent {
+    max-width: 1500px;
+    margin: auto;
+  }
+}
