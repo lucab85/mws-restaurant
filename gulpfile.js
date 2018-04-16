@@ -5,8 +5,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
+var uglify = require('gulp-uglify-es').default;
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
 var webserver = require('gulp-webserver');
@@ -49,15 +48,17 @@ gulp.task('scripts-lint', function() {
     .pipe(babel({
       presets: ['env']
     }))
+    .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
   gulp.src('sw.js')
     .pipe(babel({
       presets: ['env']
     }))
+    .pipe(uglify())
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('scripts-dist-lint', function() {
+gulp.task('scripts-test', function() {
   gulp.src('js/**/*.js')
     .pipe(babel({
       presets: ['env']
@@ -67,6 +68,7 @@ gulp.task('scripts-dist-lint', function() {
     .pipe(babel({
       presets: ['env']
     }))
+    .pipe(uglify())
     .pipe(gulp.dest('dist/'));
 });
 
