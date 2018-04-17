@@ -1,0 +1,22 @@
+{
+  "short_name": "Restaurant Review",
+  "name": "Restaurant Review PWA",
+  "icons": [
+    {
+      "src": "restaurantreview-1x.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "restaurantreview-2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "restaurantreview-4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "index.html"
+}

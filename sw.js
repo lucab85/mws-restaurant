@@ -49,13 +49,6 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
   console.info('Event: Fetch');
   console.log(event.request);
-  /*
-  event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
-    })
-  );
-  */
   event.respondWith(fromCache(event.request).catch((error) => {
     console.log(error);
   }));

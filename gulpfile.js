@@ -10,7 +10,7 @@ var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
 var webserver = require('gulp-webserver');
 
-gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint', 'scripts'], function() {
+gulp.task('default', ['copy-html', 'copy-images', 'copy-manifest', 'styles', 'lint', 'scripts'], function() {
   gulp.watch('sass/**/*.scss', ['styles']);
   gulp.watch('js/**/*.js', ['lint']);
   gulp.watch('/*.html', ['copy-html']);
@@ -24,6 +24,7 @@ gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint', 'scripts'], 
 gulp.task('dist', [
   'copy-html',
   'copy-images',
+  'copy-manifest',
   'styles',
   'lint',
   'scripts-dist'
@@ -82,6 +83,11 @@ gulp.task('copy-images', function() {
     .pipe(gulp.dest('dist/img'));
 });
 
+gulp.task('copy-manifest', function() {
+  gulp.src('./*.json')
+    .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('styles', function() {
   gulp.src('sass/**/*.scss')
     .pipe(sourcemaps.init())
@@ -92,8 +98,7 @@ gulp.task('styles', function() {
       browsers: ['last 2 versions']
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist/css'))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('lint', function () {
@@ -111,6 +116,6 @@ gulp.task('webserver', function() {
       host: 'localhost',
       port: 8000,
       livereload: true,
-      open: true
+      open: true,
     }));
 });
