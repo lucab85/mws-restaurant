@@ -5,12 +5,14 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
-var uglify = require('gulp-uglify-es').default;
+var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var sourcemaps = require('gulp-sourcemaps');
 var webserver = require('gulp-webserver');
+var imagemin = require('gulp-imagemin');
+var pngquant = require('imagemin-pngquant');
 
-gulp.task('default', ['copy-html', 'copy-images', 'copy-manifest', 'styles', 'lint', 'scripts'], function() {
+gulp.task('default', ['copy-html', 'copy-images', 'copy-manifest', 'styles', 'lint', 'copy-scripts'], function() {
   gulp.watch('sass/**/*.scss', ['styles']);
   gulp.watch('js/**/*.js', ['lint']);
   gulp.watch('/*.html', ['copy-html']);
@@ -23,14 +25,14 @@ gulp.task('default', ['copy-html', 'copy-images', 'copy-manifest', 'styles', 'li
 
 gulp.task('dist', [
   'copy-html',
-  'copy-images',
+  'images-process',
   'copy-manifest',
   'styles',
   'lint',
   'scripts-dist'
 ]);
 
-gulp.task('scripts', function() {
+gulp.task('copy-scripts', function() {
   gulp.src('js/**/*.js')
     .pipe(gulp.dest('dist/js'));
   gulp.src('sw.js')
@@ -39,35 +41,29 @@ gulp.task('scripts', function() {
 
 gulp.task('scripts-dist', function() {
   gulp.src('js/**/*.js')
-    .pipe(gulp.dest('dist/js'));
-  gulp.src('sw.js')
-    .pipe(gulp.dest('dist/'));
-});
-
-gulp.task('scripts-lint', function() {
-  gulp.src('js/**/*.js')
     .pipe(babel({
-      presets: ['env']
+      presets: [
+        ['env', {
+          targets: {
+            browsers: ['last 2 versions']
+          }
+        }]
+      ]
     }))
     .pipe(uglify())
+    .on('error', function(err) {
+      console.log('[ERROR] '+ err.toString() );
+    })
     .pipe(gulp.dest('dist/js'));
   gulp.src('sw.js')
     .pipe(babel({
-      presets: ['env']
-    }))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/'));
-});
-
-gulp.task('scripts-test', function() {
-  gulp.src('js/**/*.js')
-    .pipe(babel({
-      presets: ['env']
-    }))
-    .pipe(gulp.dest('dist/js'));
-  gulp.src('sw.js')
-    .pipe(babel({
-      presets: ['env']
+      presets: [
+        ['env', {
+          targets: {
+            browsers: ['last 2 versions']
+          }
+        }]
+      ]
     }))
     .pipe(uglify())
     .pipe(gulp.dest('dist/'));
@@ -86,6 +82,15 @@ gulp.task('copy-images', function() {
 gulp.task('copy-manifest', function() {
   gulp.src('./*.json')
     .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('images-process', function() {
+  return gulp.src('img/*')
+    .pipe(imagemin({
+      progressive: true,
+      use: [pngquant()]
+    }))
+    .pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('styles', function() {

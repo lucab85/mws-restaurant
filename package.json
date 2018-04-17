@@ -32,10 +32,13 @@
     "gulp-babel": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^4.0.2",
+    "gulp-imagemin": "^4.1.0",
     "gulp-sass": "^3.2.1",
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "gulp-uglify-es": "^1.0.1",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "imagemin": "^5.3.1",
+    "imagemin-pngquant": "^5.1.0"
   }
 }
