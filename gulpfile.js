@@ -80,7 +80,7 @@ gulp.task('copy-images', function() {
 });
 
 gulp.task('copy-manifest', function() {
-  gulp.src('./*.json')
+  gulp.src('./manifest.json')
     .pipe(gulp.dest('./dist'));
 });
 
