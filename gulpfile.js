@@ -82,6 +82,8 @@ gulp.task('copy-images', function() {
 gulp.task('copy-manifest', function() {
   gulp.src('./manifest.json')
     .pipe(gulp.dest('./dist'));
+  gulp.src('./favicon.ico')
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('images-process', function() {

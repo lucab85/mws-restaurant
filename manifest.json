@@ -3,8 +3,8 @@
   "short_name": "RR",
   "display": "standalone",
   "start_url": "index.html",
-  "theme_color": "#f3f3f3",
-  "background_color": "#bbbbb",
+  "theme_color": "#F3F3F3",
+  "background_color": "#BBBBBB",
   "description": "NYC Restaurant Reviews PWA",
   "icons": [
     {
