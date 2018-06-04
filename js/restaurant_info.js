@@ -72,6 +72,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   name.innerHTML = restaurant.name;
   name.tabIndex = '0';
 
+  this.fillRestaurantFavoriteHTML();
+
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
   address.tabIndex = '0';
@@ -92,6 +94,27 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   // fill reviews
   this.fillReviewsHTML();
 };
+
+/**
+ * Create restaurant add or remove favorite
+ */
+fillRestaurantFavoriteHTML = (is_favorite = self.restaurant.is_favorite) => {
+  const favorite = document.getElementById('restaurant-favorite');
+  console.log('favorite: ', is_favorite);
+
+  let btn = document.createElement('button');
+  btn.setAttribute('id', 'button-favorite');
+  // TODO add toggleFavorite() function
+
+  if (is_favorite == 'true') {
+    btn.innerHTML = 'Remove from Favorite';
+  } else {
+    btn.innerHTML = 'Add to Favorite';
+  }
+
+  favorite.appendChild(btn);
+};
+
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
