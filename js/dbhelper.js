@@ -51,6 +51,17 @@ class DBHelper {
     });
   }
 
+  static idbToggleFavorite(id, condition){
+    return DBHelper.idbOpen().then(function(db){
+      const tx = db.transaction(IDB_OBJ, 'readwrite');
+      const store = tx.objectStore(IDB_OBJ);
+      let val = store.get(id) || 0;
+      val.is_favorite = String(condition);
+      store.put(val, id);
+      return tx.complete;
+    });
+  }
+
   /*
    * Fetch data from API and save to IDB
    */
@@ -145,7 +156,7 @@ class DBHelper {
   }
 
   /**
-   * Fetch restaurants by favourite value with proper error handling.
+   * Fetch restaurants by favorite value with proper error handling.
    */
   static fetchRestaurantByFavorites(favorite, callback) {
     // Fetch all restaurants
@@ -153,7 +164,7 @@ class DBHelper {
       if (error) {
         callback(error, null);
       } else {
-        // Filter restaurants to have only given favourite value
+        // Filter restaurants to have only given favorite value
         const results = restaurants.filter(r => r.favorites == favorite);
         callback(null, results);
       }
@@ -265,6 +276,17 @@ class DBHelper {
           console.log('SW Registration failed with ' + error);
         });
     }
+  }
+
+  /**
+  * Add or Remove favorite flag.
+  */
+  static toggleFavorite(id, condition) {
+    fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${condition}`, { method: 'POST' })
+      .then(res => console.log(`updated API restaurant: ${id} favorite : ${condition}`))
+      .then(DBHelper.idbToggleFavorite(id, condition))
+      .then(res => console.log(`updated IDB restaurant: ${id} favorite : ${condition}`))
+      .then(location.reload());
   }
 
 }

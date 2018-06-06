@@ -20,20 +20,20 @@ let fileToCache = [
   'img/10.jpg'
 ];
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', event => {
   console.log('service worker installed');
   event.waitUntil(
-    caches.open(staticCacheName).then(function(cache) {
+    caches.open(staticCacheName).then(cache => {
       console.log('serviceWorker is caching app shell');
       return cache.addAll(fileToCache);
     })
   );
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', event => {
   console.log('Activating new service worker...');
   event.waitUntil(
-    caches.keys().then(function(cacheNames) {
+    caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.filter(function(cacheName) {
           return cacheName.startsWith('nws-') &&
@@ -46,32 +46,20 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', event => {
   console.info('Event: Fetch');
-  console.log(event.request);
-  event.respondWith(fromCache(event.request).catch((error) => {
-    console.log(error);
-  }));
-  event.waitUntil(update(event.request));
+  //console.log(event.request);
+  event.respondWith(
+    caches.match(event.request, { ignoreSearch: true }).then(response => {
+      if (response) return response;
+      return fetch(event.request);
+    }).catch((error) => {
+      console.log(error);}
+    )
+  )
 });
 
-function fromCache(request) {
-  return caches.open(staticCacheName).then(function(cache) {
-    return cache.match(request).then(function (matching) {
-      return matching || fetch(request);
-    });
-  });
-}
-
-function update(request) {
-  return caches.open(staticCacheName).then(function(cache) {
-    return fetch(request).then(function (response) {
-      return cache.put(request, response);
-    });
-  });
-}
-
-self.addEventListener('message', function(event) {
+self.addEventListener('message', event => {
   if (event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
