@@ -16,8 +16,17 @@ var markers = [];
 /*eslint-disable no-undef*/
 document.addEventListener('DOMContentLoaded', (event) => {
   DBHelper.startServiceWorker();
-  this.fetchNeighborhoods();
-  this.fetchCuisines();
+  IDBHelper.databaseExists(db=IDBHelper.IDB_DB, (res) => {
+    console.log(IDBHelper.IDB_DB + ' exists? ' + res);
+    if (!res) {
+      IDBHelper.createNewDatabase();
+      IDBHelper.populateDatabase(IDBHelper.dbPromise);
+    }
+  });
+  setTimeout(function() {
+    this.fetchNeighborhoods();
+    this.fetchCuisines();
+  }, 3000);
 });
 /*eslint-enable no-unused-vars*/
 

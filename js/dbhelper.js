@@ -1,107 +1,19 @@
 /*eslint-env es6*/
-const IDB_DB = 'restaurantDb';
-const IDB_OBJ = 'restaurantObj';
 /**
  * Common database helper functions.
  */
 /*eslint-disable no-unused-vars*/
 class DBHelper {
   /**
-   * Database URL from API server
-   */
-  static get DATABASE_URL() {
-    const port = 1337; // Change this to your server port
-    const server = 'localhost';
-    return `http://${server}:${port}/restaurants`;
-    //return 'data/restaurants.json';
-  }
-
-  /*
-   * Open connection with IDB database
-   */
-  static idbOpen() {
-    // Check Browser support
-    if (!navigator.serviceWorker) {
-      return Promise.resolve();
-    }
-    /*eslint-disable no-undef*/
-    return idb.open(IDB_DB, 1, function(upgradeDb){
-      var store = upgradeDb.createObjectStore(IDB_OBJ, {
-        keyPath: 'id'
-      });
-      store.createIndex('by-id', 'id');
-    });
-    /*eslint-enable no-undef*/
-  }
-
-  /*
-   * Save data to IDB database
-   */
-  static idbSave(data){
-    return DBHelper.idbOpen().then(function(db){
-      if(!db)
-        return;
-
-      var tx = db.transaction(IDB_OBJ, 'readwrite');
-      var store = tx.objectStore(IDB_OBJ);
-      data.forEach(function(restaurant){
-        store.put(restaurant);
-      });
-      return tx.complete;
-    });
-  }
-
-  static idbToggleFavorite(id, condition){
-    return DBHelper.idbOpen().then(function(db){
-      const tx = db.transaction(IDB_OBJ, 'readwrite');
-      const store = tx.objectStore(IDB_OBJ);
-      let val = store.get(id) || 0;
-      val.is_favorite = String(condition);
-      store.put(val, id);
-      return tx.complete;
-    });
-  }
-
-  /*
-   * Fetch data from API and save to IDB
-   */
-  static fetchRestaurantsFromAPI(){
-    return fetch(DBHelper.DATABASE_URL)
-      .then(function(response){
-        return response.json();
-      }).then(restaurants => {
-        DBHelper.idbSave(restaurants);
-        return restaurants;
-      });
-  }
-
-  /*
-   * Get data from IDB
-   */
-  static getCachedRestaurants() {
-    return DBHelper.idbOpen().then(function(db){
-      if(!db)
-        return;
-      var store = db.transaction(IDB_OBJ).objectStore(IDB_OBJ);
-      return store.getAll();
-    });
-  }
-
-  /**
    * Fetch all restaurants.
    */
   static fetchRestaurants(callback) {
-    return DBHelper.getCachedRestaurants().then(restaurants => {
-      if(restaurants.length) {
-        return Promise.resolve(restaurants);
-      } else {
-        return DBHelper.fetchRestaurantsFromAPI();
-      }
-    }).then(restaurants=> {
-      callback(null, restaurants);
-    }).catch(error => {
-      callback(error, null);
-    });
+    /*eslint-disable no-undef*/
+    IDBHelper.readAllIdbData(IDBHelper.dbPromise)
+    /*eslint-enable no-undef*/
+      .then(restaurants => {
+        return callback(null, restaurants);
+      });
   }
 
   /**
@@ -281,11 +193,13 @@ class DBHelper {
   /**
   * Add or Remove favorite flag.
   */
-  static toggleFavorite(id, condition) {
-    fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${condition}`, { method: 'POST' })
-      .then(res => console.log(`updated API restaurant: ${id} favorite : ${condition}`))
-      .then(DBHelper.idbToggleFavorite(id, condition))
-      .then(res => console.log(`updated IDB restaurant: ${id} favorite : ${condition}`))
+  static toggleFavorite(id, value) {
+    fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${value}`, { method: 'POST' })
+      .then(res => console.log(`updated API restaurant: ${id} favorite : ${value}`))
+      /*eslint-disable no-undef*/
+      .then(IDBHelper.idbToggleFavorite(id, value))
+      /*eslint-enable no-undef*/
+      .then(res => console.log(`updated IDB restaurant: ${id} favorite : ${value}`))
       .then(location.reload());
   }
 

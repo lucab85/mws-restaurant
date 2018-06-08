@@ -36,7 +36,7 @@ self.addEventListener('activate', event => {
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.filter(function(cacheName) {
-          return cacheName.startsWith('nws-') &&
+          return cacheName.startsWith('mws-') &&
                  cacheName != staticCacheName;
         }).map(function(cacheName) {
           return caches.delete(cacheName);
@@ -47,8 +47,6 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  console.info('Event: Fetch');
-  //console.log(event.request);
   event.respondWith(
     caches.match(event.request, { ignoreSearch: true }).then(response => {
       if (response) return response;
@@ -56,7 +54,7 @@ self.addEventListener('fetch', event => {
     }).catch((error) => {
       console.log(error);}
     )
-  )
+  );
 });
 
 self.addEventListener('message', event => {

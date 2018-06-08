@@ -1,4 +1,5 @@
 //'use strict';
+// ref: https://www.npmjs.com/package/idb
 
 /*eslint-disable no-undef*/
 (function() {
