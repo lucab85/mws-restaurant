@@ -8,6 +8,7 @@ const API_PROTO = 'http';
 const API_SERVER = 'localhost';
 const API_PORT = '1337';
 const URL_DATABASE = `${API_PROTO}://${API_SERVER}:${API_PORT}/restaurants`;
+const URL_REVIEWS = `${API_PROTO}://${API_SERVER}:${API_PORT}/reviews/?restaurant_id=`;
 
 /**
  * Common idb helper functions.
@@ -24,6 +25,7 @@ class IDBHelper {
     /*eslint-enable no-undef*/
     return dbPromise;
   }
+
   /**
    * Check if idb restaurants index exists
    */
@@ -40,18 +42,20 @@ class IDBHelper {
       existed = false;
     };
   }
+
   /**
    * Delete idb restaurants index if exists
    */
   static deleteOldDatabase() {
     let DBDeleteRequest = window.indexedDB.deleteDatabase(IDB_DB);
     DBDeleteRequest.onerror = function () {
-      console.log('Error deleting database.');
+      console.log('Error deleting database ' + IDB_DB);
     };
     DBDeleteRequest.onsuccess = function () {
       console.log('Old db successfully deleted!');
     };
   }
+
   /**
    * Create new IDB restaurant index
    */
@@ -65,6 +69,7 @@ class IDBHelper {
       console.log(IDB_DB + ' has been created!');
     });
   }
+
   /**
    * Initialize data population
    */
@@ -77,6 +82,26 @@ class IDBHelper {
         json.map(restaurant => IDBHelper.populateRestaurantsWithReviews(restaurant, dbPromise));
       });
   }
+
+  /**
+   * Populate restaurants data including reviews
+   */
+  static populateRestaurantsWithReviews(restaurant, dbPromise) {
+    let id = restaurant.id;
+    fetch(URL_REVIEWS + id)
+      .then(res => res.json())
+      .then(reviews => dbPromise.then(
+        db => {
+          const tx = db.transaction(IDB_OBJ, IDB_RW);
+          const store = tx.objectStore(IDB_OBJ);
+          let item = restaurant;
+          item.reviews = reviews;
+          store.put(item);
+          tx.complete;
+        })
+      );
+  }
+
   /**
    * Read all data from idb restaurants index
    */
@@ -86,6 +111,7 @@ class IDBHelper {
         .objectStore(IDB_OBJ).getAll();
     });
   }
+
   /**
    * Update favorite IDB
    */
