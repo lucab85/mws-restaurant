@@ -20,7 +20,7 @@ Refer to [mws-restaurant-api](https://github.com/lucab85/mws-restaurant-api) pro
 
 ## How to start the app
 
-1. Install glup
+1. Install gulp
 ```
 npm install gulp-cli -g
 ```
