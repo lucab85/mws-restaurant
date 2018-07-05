@@ -16,7 +16,7 @@ var markers = [];
 /*eslint-disable no-undef*/
 document.addEventListener('DOMContentLoaded', (event) => {
   DBHelper.startServiceWorker();
-  IDBHelper.databaseExists(db=IDBHelper.IDB_DB, (res) => {
+  IDBHelper.databaseExists(dbname=IDBHelper.IDB_DB, (res) => {
     console.log(IDBHelper.IDB_DB + ' exists? ' + res);
     if (!res) {
       IDBHelper.createNewDatabase();

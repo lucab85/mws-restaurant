@@ -8,7 +8,8 @@ const API_PROTO = 'http';
 const API_SERVER = 'localhost';
 const API_PORT = '1337';
 const URL_DATABASE = `${API_PROTO}://${API_SERVER}:${API_PORT}/restaurants`;
-const URL_REVIEWS = `${API_PROTO}://${API_SERVER}:${API_PORT}/reviews/?restaurant_id=`;
+const URL_REVIEWS_ID = `${API_PROTO}://${API_SERVER}:${API_PORT}/reviews/?restaurant_id=`;
+const URL_REVIEWS_ALL = `${API_PROTO}://${API_SERVER}:${API_PORT}/reviews/`;
 
 /**
  * Common idb helper functions.
@@ -29,13 +30,13 @@ class IDBHelper {
   /**
    * Check if idb restaurants index exists
    */
-  static databaseExists(db = IDB_DB, callback) {
-    var req = indexedDB.open(db);
+  static databaseExists(dbname = IDB_DB, callback) {
+    var req = indexedDB.open(dbname);
     var existed = true;
     req.onsuccess = function () {
       req.result.close();
       if (!existed)
-        indexedDB.deleteDatabase(db);
+        indexedDB.deleteDatabase(dbname);
       callback(existed);
     };
     req.onupgradeneeded = function () {
@@ -88,7 +89,7 @@ class IDBHelper {
    */
   static populateRestaurantsWithReviews(restaurant, dbPromise) {
     let id = restaurant.id;
-    fetch(URL_REVIEWS + id)
+    fetch(URL_REVIEWS_ID + id)
       .then(res => res.json())
       .then(reviews => dbPromise.then(
         db => {
@@ -124,5 +125,55 @@ class IDBHelper {
       store.put(val, id);
       return tx.complete;
     });
+  }
+
+  /**
+   * Add a review in idb restaurant review
+   */
+  static idbPostReview(id, body) {
+    let key = parseInt(id);
+    IDBHelper.dbPromise.then(db => {
+      const tx = db.transaction(IDB_OBJ, IDB_RW);
+      const store = tx.objectStore(IDB_OBJ);
+      let val = store.get(key);
+      val.reviews.push(body);
+      store.put(val, key);
+      return tx.complete;
+    });
+  }
+
+  /**
+   * Fetch unsynced reviews
+   */
+  static syncOfflineReviews() {
+    IDBHelper.readAllIdbData(IDBHelper.dbPromise)
+      .then(data => {
+        let unsychedReviews = [];
+        data.forEach(item => {
+          item.reviews.forEach(review => {
+            if (review.flag) {
+              unsychedReviews.push(review);
+              delete review.flag;
+            }
+          });
+        });
+        unsychedReviews.forEach(item => {
+          const body = {
+            'restaurant_id': item.restaurant_id,
+            'name': item.name,
+            'rating': item.rating,
+            'comments': item.comments,
+            'updatedAt': item.updatedAt,
+          };
+          fetch(URL_REVIEWS_ALL, {
+            method: 'post',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body),
+          }).then(res => console.log('review synced with the server', res.json()));
+        });
+      });
   }
 }

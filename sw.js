@@ -62,3 +62,9 @@ self.addEventListener('message', event => {
     self.skipWaiting();
   }
 });
+
+self.addEventListener('sync', event => {
+  if (event.tag === 'review-sync') {
+    event.waitUntil(IDBHelper.syncOfflineReviews());
+  }
+});

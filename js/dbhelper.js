@@ -181,12 +181,14 @@ class DBHelper {
    */
   static startServiceWorker() {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then((reg) => {
-          console.log('SW Registration successful. Scope is ' + reg.scope);
-        }).catch((error) => {
-          console.log('SW Registration failed with ' + error);
-        });
+      navigator.serviceWorker.register('sw.js', {scope: '/'})
+        .then(reg => {
+          document.getElementById('restoForm').addEventListener('submit', () => {
+            reg.sync.register('review-sync')
+              .then(() => console.log('Review sync registered'));
+          });
+        })
+        .catch(err => console.log('SW Registration failed with ' + err));
     }
   }
 
@@ -201,6 +203,25 @@ class DBHelper {
       /*eslint-enable no-undef*/
       .then(res => console.log(`updated IDB restaurant: ${id} favorite : ${value}`))
       .then(location.reload());
+  }
+
+  /**
+   * Add or Remove is_favorite on the server
+   */
+  static saveOfflineReview(event, form) {
+    event.preventDefault();
+    const body = {
+      'restaurant_id': parseInt(form.id.value),
+      'name': form.dname.value,
+      'rating': parseInt(form.drating.value),
+      'comments': form.dreview.value,
+      'updatedAt': parseInt(form.ddate.value),
+      'flag': form.dflag.value,
+    };
+    /*eslint-disable no-undef*/
+    IDBHelper.idbPostReview(form.id.value, body);
+    /*eslint-enable no-undef*/
+    location.reload();
   }
 
 }
