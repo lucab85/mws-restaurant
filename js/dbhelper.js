@@ -183,10 +183,13 @@ class DBHelper {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js', {scope: '/'})
         .then(reg => {
-          document.getElementById('restoForm').addEventListener('submit', () => {
-            reg.sync.register('review-sync')
-              .then(() => console.log('Review sync registered'));
-          });
+          const restoForm = document.getElementById('restoForm');
+          if ( restoForm ) {
+            restoForm.addEventListener('submit', () => {
+              reg.sync.register('review-sync')
+                .then(() => console.log('Review sync registered'));
+            });
+          }
         })
         .catch(err => console.log('SW Registration failed with ' + err));
     }
