@@ -1,29 +1,17 @@
 {
-  "name": "mws-restaurant-review",
+  "name": "Restaurant-Reviews",
   "version": "1.0.0",
-  "description": "mws-restaurant-review",
-  "main": "gulpfile.js",
-  "scripts": {
-    "test": "gulp test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lucab85/mws-restaurant.git"
-  },
+  "description": "Restaurant-Reviews Progressive Web Application",
   "keywords": [
     "mobile web specialist",
     "nanodegree",
     "restaurant review"
   ],
-  "author": "Luca Berton",
-  "linkedIn": "https://www.linkedin.com/in/lucaberton/",
-  "email": "luca@lucaberton.it",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/lucab85/mws-restaurant/issues"
-  },
-  "homepage": "https://github.com/lucab85/mws-restaurant#readme",
   "dependencies": {
+    "include-all": "^1.0.0",
+    "rc": "1.0.1",
+    "sails": "^0.12.14",
+    "sails-disk": "~0.10.9",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "browser-sync": "^2.23.6",
@@ -40,5 +28,24 @@
     "gulp-webserver": "^0.9.1",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.1.0"
-  }
+  },
+  "scripts": {
+    "test": "cd assets; gulp test",
+    "prestart": "cd assets; gulp dist",
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucab85/mws-restaurant.git"
+  },
+  "author": "Luca Berton",
+  "linkedIn": "https://www.linkedin.com/in/lucaberton/",
+  "email": "luca@lucaberton.it",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucab85/mws-restaurant/issues"
+  },
+  "homepage": "https://github.com/lucab85/mws-restaurant#readme"
 }

@@ -199,7 +199,7 @@ class DBHelper {
   * Add or Remove favorite flag.
   */
   static toggleFavorite(id, value) {
-    fetch(`http://localhost:1337/restaurants/${id}/?is_favorite=${value}`, { method: 'POST' })
+    fetch(`https://mws-restaurant-217808.appspot.com/restaurants/${id}/?is_favorite=${value}`, { method: 'POST' })
       .then(res => console.log(`updated API restaurant: ${id} favorite : ${value}`))
       /*eslint-disable no-undef*/
       .then(IDBHelper.idbToggleFavorite(id, value))

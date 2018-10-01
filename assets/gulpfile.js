@@ -25,11 +25,11 @@ gulp.task('default', ['copy-html', 'copy-images', 'copy-manifest', 'styles', 'li
 
 gulp.task('dist', [
   'copy-html',
-  'images-process',
+  'copy-images',
   'copy-manifest',
   'styles',
   'lint',
-  'scripts-dist'
+  'copy-scripts'
 ]);
 
 gulp.task('copy-scripts', function() {
@@ -105,7 +105,7 @@ gulp.task('styles', function() {
       browsers: ['last 2 versions']
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist/css'));
+    .pipe(gulp.dest('css'));
 });
 
 gulp.task('lint', function () {

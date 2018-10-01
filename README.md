@@ -6,7 +6,7 @@ In **Restaurant Reviews** project, I incrementally converted a static webpage to
 # Usage
 
 1. Follow the instructions of [Getting Started](#getting-started) section
-1. Open your browser on [localhost:8000](http://localhost:8000).
+1. Open your browser on Develompent [localhost:1337](http://localhost:1337) or in Production [localhost:80](http://localhost:80).
 
 # Architecture
 
@@ -15,35 +15,21 @@ In **Restaurant Reviews** project, I incrementally converted a static webpage to
 
 # Getting Started
 
-## How to start the server
-Refer to [mws-restaurant-api](https://github.com/lucab85/mws-restaurant-api) project.
+## How to start the server and the app
 
-## How to start the app
-
-1. Install gulp
-```
-npm install gulp-cli -g
-```
-
-2. Install project dependencies
+1. Install project dependencies
 
 ```
 npm install
 ```
 
-3. Buil your app to `dist` directory
+2. Build your app and start webserver to serve content
 
 ```
-gulp dist
+npm start
 ```
 
-4. Start webserver to serve content
-
-```
-gulp webserver
-```
-
-5. Open your browser on [localhost:8000](http://localhost:8000).
+3. Open your browser on Develompent [localhost:1337](http://localhost:1337) or in Production [localhost:80](http://localhost:80).
 
 # How to contribute
 Refer to [CONTRIBUTING](CONTRIBUTING) file.
