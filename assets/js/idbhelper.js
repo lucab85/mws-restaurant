@@ -5,7 +5,7 @@ const IDB_VER = 1;
 const IDB_RW = 'readwrite';
 
 const API_PROTO = 'https';
-const API_SERVER = 'mws-restaurant-217808.appspot.com';
+const API_SERVER = 'api.restaurantreviews.online';
 const API_PORT = '443';
 const URL_DATABASE = `${API_PROTO}://${API_SERVER}:${API_PORT}/restaurants`;
 const URL_REVIEWS_ID = `${API_PROTO}://${API_SERVER}:${API_PORT}/reviews/?restaurant_id=`;

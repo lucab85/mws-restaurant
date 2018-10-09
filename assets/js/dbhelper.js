@@ -9,6 +9,14 @@ class DBHelper {
    */
   static fetchRestaurants(callback) {
     /*eslint-disable no-undef*/
+    IDBHelper.databaseExists(dbname=IDBHelper.IDB_DB, (res) => {
+      console.log(IDBHelper.IDB_DB + ' exists? ' + res);
+      if (!res) {
+        IDBHelper.createNewDatabase().then(
+          IDBHelper.populateDatabase(IDBHelper.dbPromise)
+        );
+      }
+    });
     IDBHelper.readAllIdbData(IDBHelper.dbPromise)
     /*eslint-enable no-undef*/
       .then(restaurants => {
@@ -199,7 +207,7 @@ class DBHelper {
   * Add or Remove favorite flag.
   */
   static toggleFavorite(id, value) {
-    fetch(`https://mws-restaurant-217808.appspot.com/restaurants/${id}/?is_favorite=${value}`, { method: 'POST' })
+    fetch(`https://api.restaurantreviews.online/restaurants/${id}/?is_favorite=${value}`, { method: 'POST' })
       .then(res => console.log(`updated API restaurant: ${id} favorite : ${value}`))
       /*eslint-disable no-undef*/
       .then(IDBHelper.idbToggleFavorite(id, value))
